@@ -1,0 +1,11 @@
+PREDEF:
+CHAPS:
+- hajimeni.re
+- daydream.re
+- daydream-setup.re
+- daydream-dev.re
+
+APPENDIX:
+
+POSTDEF:
+- atogaki.re
