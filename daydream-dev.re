@@ -8,7 +8,7 @@
 
 Daydreamも発表されて約1年半、リリースされて約1年経ちました。
 Google VR SDK（略称：GVR SDK）として、様々なライブラリやツールが揃ってきております。
-古い情報も残っていたり、Cardboard向けやiOS向けの話もあり、さあ冒険に出かけよう、と考えても迷子になりやすい状況とも言えます。
+古い情報も残っていたり、Cardboard向けやiOS向けの話もあり、さあ冒険に出かけよう、と足を踏み出しても迷子になりやすい状況とも言えます。
 
 この章では、入り口からの歩き方として、はじめに試すべきサンプルやツールの紹介をします。
 
@@ -28,7 +28,7 @@ Google VR SDKはネイティブ（Java, C/C++）やUnreal Engineもサポート�
  2. APIの自動アップグレード確認ダイアログが出るため、了承して実行
  3. 「GoogleVR＞Demos＞Scenes」配下の「GVRDemo」シーンを開く
  4. 「Build Settings」を開いて、「GVRDemo」シーンをビルド対象に追加、Platformを「Andorid」に「Switch Platform」を実行
- 5. 「Player Settings」を開いて、3箇所設定
+ 5. 「Player Settings」を開いて、以下の設定を変更
  6. 「Other Settings」より「Package Name」を適当な文字列に変更
  7. 同じく「Other Settings」より「Minimum API Level」を「Android 7.0 'Nougat' (API level 24)」に変更
  8. 「XR Settings」の「Virtual Reality Supported」をチェックして有効に、「Virtual Reality SDKs」の「+」ボタンを選択して、「Daydream」を追加
@@ -39,13 +39,13 @@ Google VR SDKはネイティブ（Java, C/C++）やUnreal Engineもサポート�
 うまくいくと、灰色の空間上に、赤色のキューブが浮かんでいるアプリが立ち上がります。
 Daydreamコントローラを（ホーム長押しで）有効にして、ポインタをあててみましょう。
 赤色のキューブが青緑に色に変化します（@<img>{gvr-sdk-gvrdemo-01}）。
-キューブはポインタで示して、タッチパネルをクリックすると、部屋内のどこかにワープします。
+キューブをポインタで示して、タッチパネルをクリックすると、部屋内のどこかにワープします。
 
 == Instant Preview
 
-さて、GVRDemoにはDaydream向けのステレオ表示とヘッドトラッキングの（自動的な）制御から、コントローラの接続状態のハンドリング、コントローラ操作での3Dオブジェクトに対するRay（光線）制御によるヒット判定とメニュー操作と、基本が詰まっており、根幹としてはこれがDaydreamの全てです。
+前節で紹介したGVRDemoにはDaydream向けのステレオ表示とヘッドトラッキングの（自動的な）制御から、コントローラの接続状態のハンドリング、コントローラ操作での3Dオブジェクトに対するRay（光線）制御によるヒット判定とメニュー操作と、基本が詰まっており、根幹としてはこれがDaydreamの全てです。
 
-さて、具体的なアプリを開発していきましょう、となった際に、毎回ビルドとAndroidデバイスへの転送、インストールを待って…というサイクルを繰り返すのは効率的ではありません。
+さて、つづけて具体的なアプリを開発していきましょう、となった際に、毎回ビルドとAndroidデバイスへの転送、インストールを待って…というサイクルを繰り返すのは効率的ではありません。
 できればUnityエディタ上で再生して、開発サイクルを回していきたいですよね。
 
 === Unityエディタ上での頭の振りやコントローラ操作のシミュレーション
@@ -64,7 +64,7 @@ GVRDemoのプレビュー再生中に、以下の操作を試して見てくだ�
 //image[gvr-sdk-editor-simulation][Unityエディタ上でのDaydreamコントローラのタッチパッドシミュレーションの様子][scale=0.75]
 
 ひととおりの動作ができるようになっています。
-少々操作は複雑ですが、タッチパッドのスワイプ操作まで可能です（@<img>{gvr-sdk-editor-simulation}）。
+少々操作は複雑ですが、タッチパッドのスワイプ操作も可能です（@<img>{gvr-sdk-editor-simulation}）。
 
 === ヘッドセットを被ってプレビューしたい
 
@@ -83,11 +83,12 @@ Instant Previewは、専用のアプリをAndoridデバイス上で動作させ�
 USB・Wi-Fi経由いずれも使えます。
 ただし、Wi-Fi経由については映像ストリーミングのための通信帯域の観点や、特定のマルチキャストアドレスとポートによる通信が可能なネットワークである必要があり、USB経由の方がお手軽です。
 
-前項で動かしたGVRDemoシーンに、Instant Previewに必要なPrefabがすでに含まれています。
+前節で動かしたGVRDemoシーンに、Instant Previewに必要なPrefabがすでに含まれています。
 Daydream母艦となるAndroidデバイスをUSBで接続して、Unityエディタで再生すると、必要なアプリのインストールと起動は自動的に行われ、映像の再生がすぐに始まります。
 
 コントローラについては、実デバイスであればHomeボタンの長押しを、Controller Emulatorであればアプリを起動してBluetoothの接続を待つだけです。
-adb（Android Debug Bridge）コマンドまわりを使っているため、UnityエディタからAndroidアプリのビルドとインストール・実行が正常に動く環境であれば問題ないはずです。
+
+adb（Android Debug Bridge）コマンドまわりを使っているため、UnityエディタからAndroidアプリのビルドとインストール・実行が正常に動く環境であれば問題なく動作するはずです。
 うまくいかない際には紹介したページ内に「Troubleshooting in Unity」という項目がありますのでそちらを参照ください。
 
 == Daydream Elements
@@ -223,18 +224,19 @@ NOLO Tetris@<fn>{nolo-tetris}というアプリが公式サイトからダウン
 ただし、そもそもすべてがうまくいってる状態でもヘッドセットもコントローラもプルプルと震え@<fn>{nolo-world-shake}、数秒に1回程度、10cmから30cmほどスィーッと滑ります。
 これは厳しい。
 
-ちなみに、もう一つの宇宙戦争っぽいアプリやSDK for Android Javaのアプリもちゃんと動いてくれませんでした。
-Forumを探しているうちに見つけたNOLO GUNというアプリは動くには動いたのですが、銃をもったり弾をこめたりする操作性が悪すぎてとても辛かったことをここに記しておきます。
+他のアプリも試して見ます。
+もう一つの宇宙戦争っぽいアプリはコントローラが動かず、SDK for Android Javaのサンプルアプリはスクリーショット例のようにきちんとログは出てくれず、正常に動いていないように見えました。
+Forumを探しているうちに見つけたNOLO GUNというアプリは動くには動いたのですが、銃をもったり弾をこめたりする操作性が悪すぎてとても辛かったです。
 
 //footnote[nolo-manual][User Guide — NOLO - Motion Tracking for VR @<href>{https://www.nolovr.com/user-guide-en}]
-//footnote[nolo-tetris][NoloTetr​​is - Google Play @<href>{https://play.google.com/store/apps/details?id=com.lyrobotix.nolodaydream}]
+//footnote[nolo-tetris][NoloTetris - Google Play @<href>{https://play.google.com/store/apps/details?id=com.lyrobotix.nolodaydream}]
 //footnote[nolo-world-shake][ヘッドセットの位置認識がプルプル震えるとどうなるかというと、VR空間上で世界がプルプルと震えます。SaGa2の非常階段から最下層みたいな感じです。]
 
 === NOLO + Daydream
 
 さて、そんなプルプルにもスィーッにもめげずに、Daydreamで動くか試してみました。
 空中や水中で浮いてるようなケースに限定すればそれなりに楽しめる可能性がありますからね！
-基本的にはGitHub上で公開されているNOLO-Unity-SDKの「Get Started」@<fn>{nolo-unity-get-started}の手順の通りで問題ありません。
+基本的にはGitHub上で公開されているNOLO-Unity-SDKの「Get Started」@<fn>{nolo-unity-get-started}の手順の通りです。
 この際に、Daydreamコントローラは使わないため、前章で述べた「VR Entry Flow」の無効化設定はONにしておくことをオススメします。
 
 Unityのバージョンは2017.2.0f3で確認しています。
@@ -247,8 +249,8 @@ SDK内、Exapmpleフォルダ配下にはいくつかのサンプルシーンが
 
 //image[nolo-unity-03][Testシーンの動作画面][scale=1.00]
 
-前述のNOLO Tetrisと同様に、プルプル揺れたりスイーッと水平方向に滑る現象はとくに変わりはありませんでしたが、各ユニットの座標・傾き、ボタンの状態はきちんととれていることが分かりました（@<img>{nolo-unity-03}）。
-首振り制御の競合などが懸念されたDaydreamとしての動作もとくに問題ないようです。
+前述のNOLO Tetrisと同様に、プルプル揺れたりスイーッと水平方向に滑る現象は（残念ながら）とくに変わりはありませんでしたが、各ユニットの座標・傾き、ボタンの状態はきちんととれていることが分かりました（@<img>{nolo-unity-03}）。
+首振り制御の競合などが懸念されたDaydreamとしての動作もとく問題ないようです。
 APIの動作が素直だと何かを作ってみようという気になりますね。
 
 そんなわけで将来の猶予はあまりありませんが、可能性は感じました。

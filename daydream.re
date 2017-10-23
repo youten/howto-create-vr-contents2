@@ -29,7 +29,7 @@ SoC、センサ、ディスプレイの3つの要件があります。
  * 姿勢予測のための高い分解能と低遅延のセンサ
  * 高い応答速度、低遅延のディスプレイ
 
-Socについては、現状Daydream-ready phonesに認定されているAndroidデバイスから判断するとSnapdrago 820以上であれば満たすと考えられます。
+SoCについては、現状Daydream-ready phonesに認定されているAndroidデバイスから判断するとSnapdrago 820以上であれば満たすと考えられます。
 ただし、「MediaTekがDaydreamのためのSoCを開発する」というニュース@<fn>{daydream-ready-soc-mediatek}も発表されており、Snapdragonに限定はされていない模様です。
 
 ディスプレイについては、現時点では種々の応答性能の都合上有機ELのみが採用されています。
@@ -42,14 +42,15 @@ Socについては、現状Daydream-ready phonesに認定されているAndroid�
 
 === Daydaream Viewとコントローラ
 
-//image[daydream-view-controller][Daydream View（旧型）と専用コントローラ][scale=0.75]
+//image[daydream-view-controller][Daydream View（旧型）本体と専用コントローラ][scale=0.75]
 
 ==== 専用コントローラ
 
-DaydreamのVRアプリを体験するには、レンズ付きヘッドユニットがセットになったDaydream View@<img>{daydream-view-controller}本体と、Bluetooth接続の専用コントローラが必要です。
+DaydreamのVRアプリを体験するには、レンズ付きヘッドユニットがセットになったDaydream View（@<img>{daydream-view-controller}）本体と、Bluetooth接続の専用コントローラが必要です。
 
 このレンズつきヘッドユニット部ですが、特別な回路は搭載されていないため、レンズ部分が同等であれば、実は別のCardboardゴーグルを利用しても動作させることができます。
-旧型のDaydream ViewにはNFCタグが埋め込まれており、初回セットアップ時に読み込んでいましたが、不要になっていました。
+旧型のDaydream ViewにはNFCタグが埋め込まれています。
+以前はNFCタグの読み込みが初期セットアップの途中で必要だったのですが、現在は不要になっています。
 新型のDaydream ViewにはNFCタグは搭載されていないのかもしれません。
 
 このコントローラはIMUセンサを含み、クリックのできるタッチパッド、Appボタン、Homeボタンとボリュームボタンを持ちます。
@@ -60,13 +61,14 @@ Bluetooth LE（Low Energy）の用語で言うと、「あるServiceのあるCha
 
 ==== Daydreamコントローラのハック
 
-「iPhoneでもDaydreamコントローラは使えないか？」という話に始まり、Daydreamコントローラをハックした事例があります。
-センサ類のイベント情報をBLE経由で取得し、解析するに至った流れが「How I hacked Google Daydream controller – Hacker Noon@<fn>{daydream-controller-hack}」というblogエントリに掲載されています。
+「iPhoneでもDaydreamコントローラは使えないか？」という話に始まった、Daydreamコントローラをハックした事例があるので紹介します。
+
+センサ類のイベント情報をBLE経由で取得し、解析した話が「How I hacked Google Daydream controller – Hacker Noon@<fn>{daydream-controller-hack}」というblogエントリに掲載されています。
 最終的にはA-Frameを用いたiPhone上のHTMLコンテンツ上でDaydreamコントローラの情報がとれるところまで簡潔にまとまっており、全貌を読み取るには少々のBLEの知識が必要ですが、ぜひ読んでみてください。
 
 このハック内容によると、Daydreamコントローラはセンサ情報をBluetooth LEのGATT NotifyでCentral（スマートフォン母艦）側に送信し続けています。
 その内容は、ジャイロ・地磁気・加速度センサそれぞれのX軸・Y軸・Z軸の情報、Home・App・VolumeUp・VolumeDown・タッチパッドのクリック状態の各ボタンのon/off情報、タッチパッドのXY座標の情報などがぎゅっと160bitのbit列に詰められています。
-複雑な式による計算結果や、暗号化されたデータではないとのことです。
+複雑な式による計算結果であったり、暗号化されたデータではないとのことです。
 
 このことより、Daydreamのコントローラ側はシンプルにIMUセンサの取得値やボタン類の状態を送信するだけのつくりになっており、賢いアームモデルのエミュレーションはスマートフォン内部で行なっていることがわかります。
 
@@ -76,7 +78,7 @@ Bluetooth LE（Low Energy）の用語で言うと、「あるServiceのあるCha
 
 //image[new-daydream-view][新型のDaydream View][scale=0.75]
 
-つい先日の2017年10月4日、Googleの新Product発表会が行われ、話題のGoogle HomeファミリーやPixel 2/Pixel 2 XLとあわせて、新型のDaydream View@<fn>{new-daydream-view}が発表されました（@<img>{new-daydream-view}）。
+つい先日の2017年10月4日、Googleの新製品発表会が行われ、話題のGoogle HomeファミリーやPixel 2/Pixel 2 XLとあわせて、新型のDaydream View@<fn>{new-daydream-view}が発表されました（@<img>{new-daydream-view}）。
 特徴と、気になるポイントを以下に述べます。
 
  * 重いAndroidデバイスを装着時にバランスが悪くなりやすかったため、取り外し可能な上部のバンドを追加。あわせて頰にあたる部分のクッション形状を変更
@@ -107,8 +109,8 @@ Googleのblogには年内発売と述べられています@<fn>{pixel2-and-daydr
 === Android 7.0 NougatとVRモード
 
 Android 7.0 NougatでDaydreamのために特別な対応が入り、AndroidプラットフォームとしてはVRモードというものが定義されました。
-Androidデバイスの互換性について定義したCDD@<fn>{android-cdd}というドキュメントがあり、にVirutal Realityの項目があります。
-Daydream対応Androidデバイスをつくる仕事でもしていなければあまり役には立たない話なのですが、VRモードの定義の他、「DadyreamというVirtual Reality要件に対応したAndroidデバイスはどんな条件を満たさないといけないのか」という観点は面白いので、少しCDDを見ていきましょう。
+Androidデバイスの互換性について定義したCDD@<fn>{android-cdd}というドキュメントがあり、その中にVirutal Realityという項目があります。
+CDDはAndroidデバイスそのものをつくる仕事でもしていなければあまり縁がないドキュメントなのですが、VRモードの定義の他、「DadyreamというVirtual Reality要件に対応したAndroidデバイスはどんな条件を満たさないといけないのか」という話はアプリ開発側の観点でも面白い情報が詰まっています。詳細を少しみていきましょう。
 
 CDDの「7.9. Virtual Reality」の項目@<fn>{android-cdd-vr}に「7.9.1. Virtual Reality Mode」という記載があり、そこでは「VRモードをサポートすること。そのモードでは、通知などを双眼のHMDのためにステレオでレンダリングし、VRアプリケーションが動作している間はモノラル（単眼）のシステムUIを無効化すること。」とあります。
 ディスプレイの黒挿入モードやフレームバッファへのダイレクトレンダリング、センサ情報の低遅延伝達あたりはこの「VRモード」と直接は関係ない模様です。
@@ -139,17 +141,18 @@ Feature Requirements@<fn>{daydream-feature-requirements}に記載されている
  * [C-1-17] ディスプレイはGray-to-Gray、White-to-Black、Black-to-Whiteがの応答性能が3ms以下であること
  * [C-1-18] ディスプレイは残像が5ms以下の低残像モードの対応が必須
 
-このあたりがディスプレイ要件ですね。現時点のDaydream対応スマートフォンは全て有機ELですが、VR向けの低残像・高密度・高い開口率の液晶が徐々に発表されるプロダクトにも適用されはじめています@<fn>{oculus-go-lcd}。
+このあたりがディスプレイ要件です。
+現時点のDaydream対応スマートフォンは全て有機ELですが、VR向けの低残像・高密度・高い開口率の液晶が徐々に発表されるプロダクトにも適用されはじめています@<fn>{oculus-go-lcd}。
 
- * [C-1-19] Bleuetooth 4.2とBluetooth LE（Low Energy）とData Length Extension対応必須
+ * [C-1-19] Bluetooth 4.2とBluetooth LE（Low Energy）とData Length Extension対応必須
 
 BLEはDaydreamコントローラ用の要件です。
 
  * [SR] @<code>{android.hardware.sensor.hifi_sensors}の対応を強く推奨
  
 hifi sensorはAndroid 6.0から定義が追加された「高い忠実性（high fidelity）をもつセンサ」のことです。
-Androidの要件としては加速度センサやジャイロセンサは「50Hzが必須」レベルなのですが、hifi sensorでは「400Hzまたはそれ以上が必須」となっています。
-頭部の姿勢予測に使われるものと考えられます。
+Androidの要件としては加速度センサやジャイロセンサの性能は「50Hzが必須」レベルなのですが、hifi sensorでは「400Hzまたはそれ以上が必須」となっています。
+頭部の姿勢予測に使われているものと考えられます。
 
 //footnote[android-cdd][Android Compatibility Definition Document @<href>{https://source.android.com/compatibility/cdd}]
 //footnote[android-cdd-vr][Android CDD 7.9. Virtual Reality - @<href>{https://source.android.com/compatibility/android-cdd#7_9_virtual_reality}]
@@ -194,7 +197,7 @@ Daydreamは前述の問題点が、特定の基準を満たしたハードウェ
 今のDaydream（Cardboardも同様）はヘッドトラッキングと呼ばれる、頭の向きのみを考慮したトラッキングになっています。
 体を大きく前に乗り出したり、敵の弾を避けようと横に上半身を躱すような動作に対応しておらず、そのような動作をした際には体の動きとヘッドセットで表示される視界に不一致が起きるため、酔いに繋がってしまいます。
 
-そのため、現行のDaydreamでは「回らないソファにゆったりと座った状態で軽く首を動かすことを想定し、大きく体をひねって真後ろの敵を撃つようなコンテンツは避けること」といったことがすすめられています@<fn>{vr-ar-mr-google}。
+そのため、現行のDaydreamでは「回らないソファにゆったりと座った状態で軽く首を動かすことを想定し、大きく体をひねって真後ろの敵を撃つようなコンテンツは避けること」といったことが推奨されています@<fn>{vr-ar-mr-google}。
 
 つい先日、Oculus Connect 4で、スタンドアローン型のヘッドセット、Oculus Goが発表されましたので、せっかくなので比較してみましょう（@<table>{daydaream-standalone-oculus-go}）。
 どちらも発表時のみの情報であり、実際に発売されるまでには変更される可能性が高いことはご了承願います。
@@ -218,7 +221,7 @@ Oculus GoはコアとなるSoCについて、その価格からミドルレン�
 Daydream standaloneはSnapdragon 835ベースでハイエンドのデバイスであると推測されます。
 
 これらのスタンドアローン機はどのようなメリットがあるのでしょうか。
-現行機の「Galaxy S8とGear VRのセットで$749」や「Pixel 2とDaydream Viewのセットで$749」という価格帯は決して気軽にエントリーできるものではありません。
+現行機の「Galaxy S8とGear VRのセットで$749」や「Pixel 2とDaydream Viewのセットで$749」という価格帯は決して気軽に購入できるものではありません。
 「Oculus Goの$199」や「Daydream standaloneの$599」は販促目的でのVR体験キャンペーンなどに20台とか用意する際の費用や、物理的な取り回しにおいてメリットがある、という無難な期待をしておくのが妥当そうでしょうか。
 
 ただし、そもそも日本での入手性が不明なため、残念ながらどちらも「VRマニアなら持ってる」という一品で終わってしまう可能性もあります。
@@ -227,30 +230,30 @@ Daydream standaloneはSnapdragon 835ベースでハイエンドのデバイス�
 //footnote[daydream-standalone][Daydream standalone @<href>{https://vr.google.com/daydream/standalonevr/}]
 //footnote[oculus-go][Pioneering the Frontier of VR: Introducing Oculus Go, Plus Santa Cruz Updates @<href>{https://www.oculus.com/blog/pioneering-the-frontier-of-vr-introducing-oculus-go-plus-santa-cruz-updates/}]
 
-== ARとAR Coreとポジショントラッキング
+== ARとARCoreとポジショントラッキング
 
 AR戦国時代がいつのまにか始まりました。
-HoloLensのMRや、Google TangoもZenFone ARから盛り上がって…と言いたいところですが、そんなことはありません。
+HoloLensのMRや、2機種目が市販されたGoogle Tangoが盛り上がって…というテクノロジー主導ではなく、どちらかというとソーシャル主導で始まったように見えています。
 
-写真SNSであるInstagramが台頭する中、楽しく"盛れる"snowなどのアプリによるリアルタイムの画像処理技術の進化競争がある中、"たまたま"ポケモンGOがやってきました。
+写真SNSであるInstagramが台頭する中、楽しく"盛れる"snowなどのアプリによるリアルタイムの画像処理技術の進化競争が行われていた中、"たまたま"ポケモンGOがやってきました。
 ポケモンGOで、人は「カメラ映像にCGを重畳するAR」を思い出してしまったのです。
 この流れの分かりやすい例としては、Snapchatによる、世界をARで装飾するWorld Lenses@<fn>{snapchat-ar}があります。
 
-ポケモンGOはなんとなくであのUIになってしまったわけではなく、「現実世界に拡張した情報を重ね合せる」という本質的なARサービスであるGoogleマップを開発していたバックグラウンドがあって、十分に人の心が動いて、結果体が動いてもらうための機能を検討をした上で今のような実装になったことが、CEDEC 2017のセッションで説明されています@<fn>{pokemongo-ar}。
+ポケモンGOはなんとなくであのUIになってしまったわけではなく、「現実世界に拡張した情報を重ね合せる」という本質的なARサービスであるGoogleマップを開発していたバックグラウンドがあって、十分に人の心が動いて、その結果として体が動いてもらうための機能を検討をした上で今のような実装になったことが、CEDEC 2017のセッションで説明されています@<fn>{pokemongo-ar}。
 
-そんな中、まっすぐにAR機能を有するARKitがiOS11でやってきました。
-ARKitは買収したMetaio@<fn>{apple-metaio}の技術が使われていると言われていますが、こちらもタイミングとしては"たまたま"だと思っています。
+そんな中、まっすぐにAR機能を提供するARKitがiOS11でやってきました。
+ARKitは買収したMetaio@<fn>{apple-metaio}の技術が使われていると言われていますが、こちらもタイミングとしては"たまたま"できあがったものと推測されます。
 なぜなら、歴史的にiOSは「既存のサービスのクローンを作りやすくする機能、あるいはクローンそのもの」をぶつけてくることが多いのですが、ARKitについてはそうではありません。
-前述の通りの"盛る"ための機能はiPhone XのTrueDepthカメラシステムによる3Dウ○コのやつです。
+前述の写真を"盛る"ための機能としてiPhone XのTrueDepthカメラシステムによる3Dウ○コがやってきた話とは違うのです。
 
-そんなARKitを世間はおおいに担ぎ上げたため、Googleは大慌てでTangoをAR Coreに切り替えることになってしまいました。
-そのAR CoreはARKitとほぼ同等で、水平面しか検出できず、Depthもとれず、Area Learningによる外界検出結果の保存・読み出しには対応していません。
+そんなARKitですが、世間におおいに担ぎ上げられたため、Googleは大慌てでTangoをARCoreにピボットすることになってしまいました。
+そのARCoreはARKitとほぼ同等で、水平面しか検出できず、Depthもとれず、Area Learningによる外界検出結果の保存・読み出しには対応していません。
 Tangoと比較して、機能としてはかなりの劣化版です。
 
 本質的なARはGoogleマップですでに日常使われています。「カメラ映像にCGを重畳する」の延長線上としてみんなが期待する電脳メガネやオーグマーは、HoloLensがその入り口に立ったところで、もう少し将来の話です。今のARブームは波がすぎると、現状のニッチであっても市場ができたVRのようには定着しないと思っています。
 
-そんなARKitとAR Coreですが、VRの世界から眺めて「モバイルにポジショントラッキング技術が来た」と考えると、次の一手が楽しみになります。
-Windows MRやOculusのSanta Cruzのように複数のカメラでもなければ、TangoやiPhone XのようにDepthカメラを持つわけではない、ハードウェアのシンプルな難易度の高いVisual SLAMにAppleとGoogleというモバイルの二大巨頭がパワーをつぎ込んでくれるわけです。
+そんなARKitとARCoreですが、VRの世界から眺めて「モバイルにポジショントラッキング技術が来た」と考えると、次の一手が楽しみになります。
+Windows MRやOculusのSanta Cruzのように複数のカメラでもなければ、TangoやiPhone XのようにDepthカメラを持つわけではない、ハードウェアがよりシンプルで難易度の高いVisual SLAMにAppleとGoogleというモバイルの二大巨頭がパワーをつぎ込んでくれるわけです。
 
 iOS 12でVRKitが来るのが先か、$199のDaydream standalone 2が来るのが先か、Tangoの取り下げで凹んだ分はきっちり他の分野が凸ってくれるといいなと思っています。
 

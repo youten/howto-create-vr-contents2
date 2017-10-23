@@ -21,11 +21,11 @@
  * @<href>{https://github.com/youten/howto-create-vr-contents2}
  ** Re:VIEWの素材一式、出力PDF、関連プロジェクトのソースコードを全て含む想定です。
 
-本書のうち、私youtenが著作権を有する範囲のライセンスについては、文章はCC-BY 4.0@<fn>{cc-by-4}、ソースコードについてはApache License v2@<fn>{apache-license-v2}を適用します。
+本書のうち、私youtenが著作権を有する範囲のライセンスについては、文章はCC-BY 4.0ライセンス@<fn>{cc-by-4}、ソースコードについてはApache License v2@<fn>{apache-license-v2}を適用します。
 
 本書籍はRe:VIEWで作成されており、その設定ファイル等について、MITライセンス@<fn>{mit-license}に基づき「C89 初めてのRe:VIEW v2」リポジトリ@<fn>{techbooster-c89-review-v2}で公開されているものを利用させていただいております。
 
-表紙他、高崎柚乃モデル@<fn>{cs-reporters-yuno}をCC-BY 4.0@<fn>{cc-by-4}に基づき利用させていただいております。
+表紙他、高崎柚乃モデル@<fn>{cs-reporters-yuno}をCC-BY 4.0ライセンス@<fn>{cc-by-4}に基づき利用させていただいております。
 
 //footnote[mit-license][@<href>{https://opensource.org/licenses/MIT}]
 //footnote[techbooster-c89-review-v2][@<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2}]
