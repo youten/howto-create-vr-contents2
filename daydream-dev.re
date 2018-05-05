@@ -6,7 +6,6 @@
 
 さて、概要を知って、使い方を知ったその次は、Daydreamアプリ開発の入り口を覗いてみましょう。
 
-Daydreamも発表されて約1年半、リリースされて約1年経ちました。
 Google VR SDK（略称：GVR SDK）として、様々なライブラリやツールが揃ってきております。
 古い情報も残っていたり、Cardboard向けやiOS向けの話もあり、さあ冒険に出かけよう、と足を踏み出しても迷子になりやすい状況とも言えます。
 
@@ -17,33 +16,32 @@ Google VR SDK（略称：GVR SDK）として、様々なライブラリやツー
 まずはHello Worldからです。
 
 Google VR SDKはネイティブ（Java, C/C++）やUnreal Engineもサポートしていますが、Unityの情報が一番多く、試す際にはオススメのプラットフォームです。
-本章では、とくに断りがなければUnityのバージョンは「2017.2.0f3」を、GVR SDKのバージョンは「v1.100.1」を利用しています。
+Unityのバージョンは推奨されている「Unity2017.4系のLTS Release」を、GVR SDKは最新の「v1.130.1」を利用しましょう。
 
 基本的には以下のページの手順に従います。
 
  * Get started with Google VR in Unity on Android
  ** @<href>{https://developers.google.com/vr/unity/get-started}
 
- 1. 新規3Dプロジェクトを作成し、「GoogleVRForUnity_1.100.1.unitypackage」をダウンロードしてインポート
- 2. APIの自動アップグレード確認ダイアログが出るため、了承して実行
- 3. 「GoogleVR＞Demos＞Scenes」配下の「GVRDemo」シーンを開く
- 4. 「Build Settings」を開いて、「GVRDemo」シーンをビルド対象に追加、Platformを「Andorid」に「Switch Platform」を実行
+ 1. 新規3Dプロジェクトを作成し、「GoogleVRForUnity_*.unitypackage」をダウンロードしてインポート
+ 2. APIの自動アップグレード確認ダイアログが出る際には、了承して実行
+ 3. 「GoogleVR＞Demos＞Scenes」配下の「HelloVR」シーンを開く
+ 4. 「Build Settings」を開いて、「HelloVR」シーンをビルド対象に追加、Platformを「Andorid」に「Switch Platform」を実行
  5. 「Player Settings」を開いて、以下の設定を変更
  6. 「Other Settings」より「Package Name」を適当な文字列に変更
  7. 同じく「Other Settings」より「Minimum API Level」を「Android 7.0 'Nougat' (API level 24)」に変更
  8. 「XR Settings」の「Virtual Reality Supported」をチェックして有効に、「Virtual Reality SDKs」の「+」ボタンを選択して、「Daydream」を追加
  9. 「Build and Run」を実行、apkの名前は適当に入力
 
-//image[gvr-sdk-gvrdemo-01][GVRDemoサンプルシーン][scale=0.75]
+//image[gvr-sdk-hellovr-01][HelloVRサンプルシーン][scale=0.75]
 
-うまくいくと、灰色の空間上に、赤色のキューブが浮かんでいるアプリが立ち上がります。
+うまくいくと、無機質な部屋に、色のついた物体が浮かんでいるアプリが立ち上がります（@<img>{gvr-sdk-hellovr-01}）。
 Daydreamコントローラを（ホーム長押しで）有効にして、ポインタをあててみましょう。
-赤色のキューブが青緑に色に変化します（@<img>{gvr-sdk-gvrdemo-01}）。
-キューブをポインタで示して、タッチパネルをクリックすると、部屋内のどこかにワープします。
+ポインタで示して、タッチパネルをクリックすると、物体が部屋内のどこかにワープします。
 
 == Instant Preview
 
-前節で紹介したGVRDemoにはDaydream向けのステレオ表示とヘッドトラッキングの（自動的な）制御から、コントローラの接続状態のハンドリング、コントローラ操作での3Dオブジェクトに対するRay（光線）制御によるヒット判定とメニュー操作と、基本が詰まっており、根幹としてはこれがDaydreamの全てです。
+前節で紹介したHelloVRサンプルにはDaydream向けのステレオ表示とヘッドトラッキングの（自動的な）制御から、コントローラの接続状態のハンドリング、コントローラ操作での3Dオブジェクトに対するRay（光線）制御によるヒット判定とメニュー操作と、基本が詰まっており、根幹としてはこれがDaydreamの全てです。
 
 さて、つづけて具体的なアプリを開発していきましょう、となった際に、毎回ビルドとAndroidデバイスへの転送、インストールを待って…というサイクルを繰り返すのは効率的ではありません。
 できればUnityエディタ上で再生して、開発サイクルを回していきたいですよね。
@@ -51,7 +49,7 @@ Daydreamコントローラを（ホーム長押しで）有効にして、ポイ
 === Unityエディタ上での頭の振りやコントローラ操作のシミュレーション
 
 まず、UnityエディタのGameウィンドウに対する操作で、頭を振ったり、Daydreamコントローラの操作がシミュレートされています。
-GVRDemoのプレビュー再生中に、以下の操作を試して見てください。
+HelloVRのプレビュー再生中に、以下の操作を試して見てください。
 
  * Alt + マウス移動：頭の回転を操作
  * Ctrl + マウス移動：頭の傾きを操作
@@ -81,14 +79,14 @@ Instant Previewは、専用のアプリをAndoridデバイス上で動作させ�
 また、逆方向でDaydreamコントローラの操作による入力も可能です。
 コントローラの操作については前章で紹介したController EmulatorアプリによるDaydreamコントローラのエミュレートにも対応しています（@<img>{gvr-sdk-instant-preview}）。
 USB・Wi-Fi経由いずれも使えます。
-ただし、Wi-Fi経由については映像ストリーミングのための通信帯域の観点や、特定のマルチキャストアドレスとポートによる通信が可能なネットワークである必要があり、USB経由の方がお手軽です。
+ただし、Wi-Fi経由については映像ストリーミングのための通信帯域の観点や、特定のマルチキャストアドレスとポートによる通信が可能なネットワークである必要があり、USB経由の方が安定している印象です。
 
-前節で動かしたGVRDemoシーンに、Instant Previewに必要なPrefabがすでに含まれています。
+前節で動かしたHelloVRシーンに、Instant Previewに必要なPrefabがすでに含まれています。
 Daydream母艦となるAndroidデバイスをUSBで接続して、Unityエディタで再生すると、必要なアプリのインストールと起動は自動的に行われ、映像の再生がすぐに始まります。
 
-コントローラについては、実デバイスであればHomeボタンの長押しを、Controller Emulatorであればアプリを起動してBluetoothの接続を待つだけです。
+コントローラについては、実デバイスであればDaydreamボタンの長押しを、Controller Emulatorであればアプリを起動してBluetoothの接続を待つだけです。
 
-adb（Android Debug Bridge）コマンドまわりを使っているため、UnityエディタからAndroidアプリのビルドとインストール・実行が正常に動く環境であれば問題なく動作するはずです。
+adb（Android Debug Bridge）まわりの仕組みを使っているため、UnityエディタからAndroidアプリのビルドとインストール・実行が正常に動く環境であれば問題なく動作するはずです。
 うまくいかない際には紹介したページ内に「Troubleshooting in Unity」という項目がありますのでそちらを参照ください。
 
 == Daydream Elements
@@ -166,6 +164,27 @@ VR動画はドラッグによって水平方向の回転も可能です@<fn>{dra
 ストリーミングサービスのバックエンドがあるなど、特定目的のDaydreamメディアアプリを開発したい際には、大変有力な手助けになると思われます。
 
 //footnote[drag-pitch][縦方向（ピッチ）の回転にも対応しているとベストだったのですが、それぐらいは自分で改造すればいいってことですよね、はい。]
+
+== Resonance AudioとAudio Factoryアプリ
+
+//image[gvr-resonance-audio-01][Resonance Audio][scale=0.9]
+
+Daydream Elementsで操作とUIについて、Daydream Rendererでグラフィック周りを、そしてMedia App TemplateでVR界特有の静止画や動画の扱いについてカバーしてきましたが、そしてこのResonance Audio@<fn>{resonance-audio}は名前の通り音の話です。
+
+Resonance Audio SDKの守備範囲については公式サイト（@<img>{gvr-resonance-audio-01}）に書いてある通りではありますが、（筆者も概ねこのレベルですが）「モノラルとステレオの違いまではわかるけどそれ以上ってなんだろう」ぐらいの方は、CEDEC 2017のカプコンの岸 智也氏の公演レポ@<fn>{cedec2017-capcom-sound}が大変参考になるので一通り目を通しておくのをオススメします。
+
+//footnote[resonance-audio][@<href>{https://developers.google.com/resonance-audio/develop/overview}]
+//footnote[cedec2017-capcom-sound][［CEDEC 2017］基礎からすっかり分かる「これで解決！　ゲームに必要な3Dオーディオの全て」の聴講レポート - 4Gamer.net @<href>{http://www.4gamer.net/games/999/G999905/20170906078/}]
+
+//image[gvr-audio-factory-01][Audio Factoryアプリ][scale=0.75]
+
+この、Resonance Audio SDKを利用したサンプルとして、Audio Factoryアプリ@<fn>{audio-factory-app}というデモアプリが公開されています。
+Spacial Audioを効果的に組み込んだ@<kw>{モバイルVRでもここまではやれる}ということを示す最高のデモになっていますので、ぜひヘッドホンを用意して体験してください。
+
+また、Audio FactoryアプリはGitHubでリポジトリ一式が公開されています@<fn>{audio-factory-app-github}。
+
+//footnote[audio-factory-app][@<href>{https://play.google.com/store/apps/details?id=com.google.vr.audiofactory&hl=ja}]
+//footnote[audio-factory-app-github][@<href>{https://github.com/resonance-audio/audio_factory}]
 
 == 6DoFモーショントラッキングシステム NOLOを試す
 
@@ -253,10 +272,9 @@ SDK内、Exapmpleフォルダ配下にはいくつかのサンプルシーンが
 首振り制御の競合などが懸念されたDaydreamとしての動作もとく問題ないようです。
 APIの動作が素直だと何かを作ってみようという気になりますね。
 
-そんなわけで将来の猶予はあまりありませんが、可能性は感じました。
-決して一般ユーザにはオススメはできませんが、機会があればちょっとだけ試す分には面白いデバイスだと思います@<fn>{nolo-try}。
+そんなわけで可能性は感じました。
+決してオススメはできませんが、機会があればちょっとだけ試す分には面白いデバイスだと思います@<fn>{nolo-try}。
 
 //footnote[nolo-unity-sdk][NOLOVR/NOLO-Unity-SDK: NOLO Unity SDK @<href>{https://github.com/NOLOVR/NOLO-Unity-SDK}]
 //footnote[nolo-unity-get-started][NOLO-Unity-SDK/GetStarted.md @<href>{https://github.com/NOLOVR/NOLO-Unity-SDK/blob/master/Docs/en_us/GetStarted.md}]
 //footnote[nolo-try][相性問題が多くセットアップ難易度が高すぎるとか、不安定ですぐ落ちるとか、ハック口がまったく開いていないとか、そういうデバイスではないということです。ガジェットのクラウドファンディング結果としては満足しています。]
-

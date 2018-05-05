@@ -32,13 +32,15 @@ SoC、センサ、ディスプレイの3つの要件があります。
 SoCについては、現状Daydream-ready phonesに認定されているAndroidデバイスから判断するとSnapdrago 820以上であれば満たすと考えられます。
 ただし、「MediaTekがDaydreamのためのSoCを開発する」というニュース@<fn>{daydream-ready-soc-mediatek}も発表されており、Snapdragonに限定はされていない模様です。
 
-ディスプレイについては、現時点では種々の応答性能の都合上有機ELのみが採用されています。
-「JDIの開発したVR専用の超高精細・高速応答　液晶ディスプレイ@<fn>{jdi-lcd-for-vr}」のように、同等の性能があれば液晶ディスプレイでも要件を満たすと考えられます。
-将来はLCDを搭載したDaydream-ready phonesも登場するでしょう。
+ディスプレイについては、応答性能の観点で有機ELが主流ですが、応答性能の高い液晶も追って開発されました。
+「JDIの開発したVR専用の超高精細・高速応答　液晶ディスプレイ@<fn>{jdi-lcd-for-vr}」のように、同等の性能があれば液晶ディスプレイでも要件を満たします。
+Lenovo社の一体型Daydream機であるMirage SoloはLCDを搭載しています@<fn>{mirage-solo-spec}。
+将来はLCDを搭載したDaydream-ready phonesも増えてくるものと思われます。
 
 //footnote[daydream-ready-phones][Daydream-ready phones @<href>{https://vr.google.com/daydream/phones/}]
 //footnote[daydream-ready-soc-mediatek][MediaTek's Next-Gen SoCs To Support Google's Daydream | Androidheadlines.com @<href>{https://www.androidheadlines.com/2016/05/mediateks-next-gen-socs-support-googles-daydream.html}]
 //footnote[jdi-lcd-for-vr][ニュース＆イベント : ニュースリリース | 株式会社ジャパンディスプレイ @<href>{http://www.j-display.com/news/2016/20161121.html}]
+//footnote[mirage-solo-spec][Lenovo Mirage Solo with Daydream | スタンドアロン型VRヘッドセット | レノボジャパン @<href>{https://www3.lenovo.com/jp/ja/vr-smartdevices/augmented-reality/lenovo-mirage-solo/Mirage-Solo/p/ZZIRZRHVR01}]
 
 === Daydaream Viewとコントローラ
 
@@ -49,11 +51,10 @@ SoCについては、現状Daydream-ready phonesに認定されているAndroid�
 DaydreamのVRアプリを体験するには、レンズ付きヘッドユニットがセットになったDaydream View（@<img>{daydream-view-controller}）本体と、Bluetooth接続の専用コントローラが必要です。
 
 このレンズつきヘッドユニット部ですが、特別な回路は搭載されていないため、レンズ部分が同等であれば、実は別のCardboardゴーグルを利用しても動作させることができます。
-旧型のDaydream ViewにはNFCタグが埋め込まれています。
+Daydream ViewにはNFCタグが埋め込まれています。
 以前はNFCタグの読み込みが初期セットアップの途中で必要だったのですが、現在は不要になっています。
-新型のDaydream ViewにはNFCタグは搭載されていないのかもしれません。
 
-このコントローラはIMUセンサを含み、クリックのできるタッチパッド、Appボタン、Homeボタンとボリュームボタンを持ちます。
+このコントローラはIMUセンサを含み、クリックのできるタッチパッド、Appボタン、Daydreamボタン（旧Homeボタン）とボリュームボタンを持ちます。
 また、Bluetoothで母艦であるDaydream-readyのAndroidデバイスと接続して動作します。
 
 このコントローラですが、BLEデバイスとしては単純なつくりになっています。
@@ -67,7 +68,7 @@ Bluetooth LE（Low Energy）の用語で言うと、「あるServiceのあるCha
 最終的にはA-Frameを用いたiPhone上のHTMLコンテンツ上でDaydreamコントローラの情報がとれるところまで簡潔にまとまっており、全貌を読み取るには少々のBLEの知識が必要ですが、ぜひ読んでみてください。
 
 このハック内容によると、Daydreamコントローラはセンサ情報をBluetooth LEのGATT NotifyでCentral（スマートフォン母艦）側に送信し続けています。
-その内容は、ジャイロ・地磁気・加速度センサそれぞれのX軸・Y軸・Z軸の情報、Home・App・VolumeUp・VolumeDown・タッチパッドのクリック状態の各ボタンのon/off情報、タッチパッドのXY座標の情報などがぎゅっと160bitのbit列に詰められています。
+その内容は、ジャイロ・地磁気・加速度センサそれぞれのX軸・Y軸・Z軸の情報、Daydream・App・VolumeUp・VolumeDown・タッチパッドのクリック状態の各ボタンのon/off情報、タッチパッドのXY座標の情報などがぎゅっと160bitのbit列に詰められています。
 複雑な式による計算結果であったり、暗号化されたデータではないとのことです。
 
 このことより、Daydreamのコントローラ側はシンプルにIMUセンサの取得値やボタン類の状態を送信するだけのつくりになっており、賢いアームモデルのエミュレーションはスマートフォン内部で行なっていることがわかります。
@@ -78,38 +79,33 @@ Bluetooth LE（Low Energy）の用語で言うと、「あるServiceのあるCha
 
 //image[new-daydream-view][新型のDaydream View][scale=0.75]
 
-つい先日の2017年10月4日、Googleの新製品発表会が行われ、話題のGoogle HomeファミリーやPixel 2/Pixel 2 XLとあわせて、新型のDaydream View@<fn>{new-daydream-view}が発表されました（@<img>{new-daydream-view}）。
-特徴と、気になるポイントを以下に述べます。
+2017年10月4日、Googleの新製品発表会が行われ、話題のGoogle HomeファミリーやPixel 2/Pixel 2 XLとあわせて、新型のDaydream View@<fn>{new-daydream-view}が発表されました（@<img>{new-daydream-view}）。
+日本では12月に入って発売されました。特にレンズの質がよく、値段アップは残念ですが良いアップデートです。
+
+特徴を以下に述べます。
 
  * 重いAndroidデバイスを装着時にバランスが悪くなりやすかったため、取り外し可能な上部のバンドを追加。あわせて頰にあたる部分のクッション形状を変更
  * 熱暴走対策として、抑え蓋がヒートシンクの役割をするように
  * 価格は$99
  ** $20アップ
- * 日本でも発売予定あり
+ * 日本でも発売
  * 視野角が10度ほど向上
  ** 約90度→約100度
  ** シンプルな凸レンズから、特殊な形状のフレネルレンズに変更
  * IPD調節機構はなし
-
-値段アップは残念です。
-安価な中国製Cardboard HMDが近年徐々に使い勝手がよくなってきている流れを汲んで、できれば値下げしてほしかったです。
-物価が気軽に上昇しがちなシリコンバレー感覚では、パワーアップしたのにおおむね価格据え置きで「勉強しました」という感覚なのかもしれません。
 
 新型Daydream Viewについて、GoogleがYouTubeにプロモーション動画を公開しています@<fn>{new-daydream-view-youtube}。
 この動画中に出てくるChromecastを使った、外部ディスプレイへのキャストは、10月上旬ごろからすでに既存のDaydreamで使えるようになっています。
 Daydreamアプリのホーム画面から「キャスト」を選択すると常時ストリーム状態になります。
 パフォーマンスには影響がありそうですが、大きな遅延はなくきちんと動作しており、デモなどいくつかのシーンでは役に立ちそうです。
 
-Googleのblogには年内発売と述べられています@<fn>{pixel2-and-daydream}ので、あわせてDaydream 2.0 EuphratesアップデートやHMDを外す必要がないフルVRモードのChromeアップデートもあわせて行われることを期待しています。
-
 //footnote[new-daydream-view][Google Daydream View Tech Specs - Google Store @<href>{https://store.google.com/us/product/google_daydream_view_specs?hl=en-US}]
 //footnote[new-daydream-view-youtube][Meet Google Daydream View | Dream with your eyes open - YouTube @<href>{https://www.youtube.com/watch?v=PNBL2DpB1YE}]
-//footnote[pixel2-and-daydream][Pixel 2 and Daydream View: new experiences in AR and VR @<href>{https://www.blog.google/products/google-vr/pixel-2-and-daydream-view-new-experiences-ar-and-vr/}]
 
 === Android 7.0 NougatとVRモード
 
 Android 7.0 NougatでDaydreamのために特別な対応が入り、AndroidプラットフォームとしてはVRモードというものが定義されました。
-Androidデバイスの互換性について定義したCDD@<fn>{android-cdd}というドキュメントがあり、その中にVirutal Realityという項目があります。
+Androidでは、デバイスの互換性について定義したCDD@<fn>{android-cdd}というドキュメントがあり、その中にVirutal Realityという項目があります。
 CDDはAndroidデバイスそのものをつくる仕事でもしていなければあまり縁がないドキュメントなのですが、VRモードの定義の他、「DadyreamというVirtual Reality要件に対応したAndroidデバイスはどんな条件を満たさないといけないのか」という話はアプリ開発側の観点でも面白い情報が詰まっています。詳細を少しみていきましょう。
 
 CDDの「7.9. Virtual Reality」の項目@<fn>{android-cdd-vr}に「7.9.1. Virtual Reality Mode」という記載があり、そこでは「VRモードをサポートすること。そのモードでは、通知などを双眼のHMDのためにステレオでレンダリングし、VRアプリケーションが動作している間はモノラル（単眼）のシステムUIを無効化すること。」とあります。
@@ -131,7 +127,7 @@ Feature Requirements@<fn>{daydream-feature-requirements}に記載されている
 
  * [C-1-11] 最低でも3840x2160@30fps-40MbpsのH.264のデコードのサポートが必須である（1920x1080@30fps-10Mbpsが4つ、あるいは1920x1080@60fps-20Mbpsが2つ同時にデコード可能、に相当）
  * [C-1-12] 最低でも1920x1080@30fps-10MbpsのHEVCとVP9のデコードのサポートが必須、できれば3840x2160@30fps-20Mbpsに対応すべき（1920x1080@30fps-5Mbpsが4つ同時にデコード可能、に相当）
- 
+
 4KのH.264は対応してくれないと困るよ、というのが読み取れます。
 4K HEVCはSHOULDで書かれているので少し弱めです。
 
@@ -149,7 +145,7 @@ Feature Requirements@<fn>{daydream-feature-requirements}に記載されている
 BLEはDaydreamコントローラ用の要件です。
 
  * [SR] @<code>{android.hardware.sensor.hifi_sensors}の対応を強く推奨
- 
+
 hifi sensorはAndroid 6.0から定義が追加された「高い忠実性（high fidelity）をもつセンサ」のことです。
 Androidの要件としては加速度センサやジャイロセンサの性能は「50Hzが必須」レベルなのですが、hifi sensorでは「400Hzまたはそれ以上が必須」となっています。
 頭部の姿勢予測に使われているものと考えられます。
@@ -185,46 +181,49 @@ Daydreamは前述の問題点が、特定の基準を満たしたハードウェ
 
 == Daydream standalone
 
-//image[daydream-standalone-vive-lenovo][Vive（HTC）（左）とLenovo（右）のDaydream standalone][scale=1.00]
+//image[daydream-standalone-vive-lenovo][Vive（HTC）（左）とLenovo（右）の発表時のDaydream standalone][scale=1.00]
 
 2017年5月、Google I/O 2017にて、スタンドアローン型のDaydreamヘッドセット、Daydream standalone@<fn>{daydream-standalone}が発表されました。
 
 ひとことで言うと「Androidが埋まっていて、電源を入れるとDaydreamのホームアプリが立ち上がるVRヘッドセット」です。
 特徴はTangoをベースとしたWorldsenseと呼ばれる技術により、ポジショントラッキング（平行移動）に対応していることです。
 
-年内発売予定で、Vive（HTC）製とLenovo製の2つ（@<img>{daydream-standalone-vive-lenovo}）が予定されています。
+Vive（HTC）製とLenovo製の2つ（@<img>{daydream-standalone-vive-lenovo}）が予定されていましたが、HTCはVive FocusというDaydreamプラットフォームではないスタンドアロンヘッドセットへと方針を転換したためこちらからは離脱し、Lenovo製のMirage Soloのみが2018年5月に発売となりました。
 
-今のDaydream（Cardboardも同様）はヘッドトラッキングと呼ばれる、頭の向きのみを考慮したトラッキングになっています。
+旧来のDaydream（Cardboardも同様）はヘッドトラッキングと呼ばれる、頭の向きのみを考慮したトラッキングになっています。
 体を大きく前に乗り出したり、敵の弾を避けようと横に上半身を躱すような動作に対応しておらず、そのような動作をした際には体の動きとヘッドセットで表示される視界に不一致が起きるため、酔いに繋がってしまいます。
 
-そのため、現行のDaydreamでは「回らないソファにゆったりと座った状態で軽く首を動かすことを想定し、大きく体をひねって真後ろの敵を撃つようなコンテンツは避けること」といったことが推奨されています@<fn>{vr-ar-mr-google}。
+そのため、「回らないソファにゆったりと座った状態で軽く首を動かすことを想定し、大きく体をひねって真後ろの敵を撃つようなコンテンツは避けること」といったことが推奨されています@<fn>{vr-ar-mr-google}。
 
-つい先日、Oculus Connect 4で、スタンドアローン型のヘッドセット、Oculus Goが発表されましたので、せっかくなので比較してみましょう（@<table>{daydaream-standalone-oculus-go}）。
-どちらも発表時のみの情報であり、実際に発売されるまでには変更される可能性が高いことはご了承願います。
+Daydream standaloneでも大きく歩き回るようなコンテンツは安全上の観点からNGではあるのですが、上半身ごと頭を左右に大きく動かしたり、立ったりしゃがんだりといった動作に対応します。
 
+今までと同様にソファに座ってゲームなどのコンテンツを楽しむ際にも、「座る」という動作で首が上から下に移動したり、そして少しエキサイトして体を前に乗り出すような動作をしても、それをWorldSenseが適切にトラッキングし、自然な視界を再現します。
+アプリが6DoFに対応していると、今までの3DoF環境における「首の動きにあわせて空中でディスプレイがついてくるような違和感」とは縁がなくなります。
 
-//table[daydaream-standalone-oculus-go][Daydream standaloneとOculus Go]{
+スタンドアローン型のヘッドセット、Oculus Goも先日のF8にて発売がアナウンスされました。同時期にローンチとなった一体型、スタンドアロンVRヘッドセットのこの2つについて、比較してみましょう（@<table>{daydaream-standalone-oculus-go}）。
+
+//table[daydaream-standalone-oculus-go][Daydream standalone(Mirage Solo)とOculus Go]{
 項目	Daydream standalone	Oculus Go	備考
 --------------------------------------------------------------------------------
 ベース技術	Daydream + Tango	Gear VR
-発売元	Vive（HTC）, Lenovo	Oculus
+発売元	Lenovo	Oculus
 アプリストア	Google Play	Oculus Store
-価格	未定	$199
-SoC	Snapdragon 835	不明
+価格	$399（51,200円）	$199（23,800円, 32GBモデル）
+SoC	Snapdragon 835	Snapdragon 821
 ヘッドトラッキング	対応	対応
 ポジショントラッキング	対応（WorldSense）	非対応
-発売時期	年内予定	2018年
+発売時期	2018.05	2018.05
 コントローラ	3DoF + タッチパッド@<br>{} + ボタン	3DoF + タッチパッド@<br>{} + ボタン（トリガ）
 //}
 
-Oculus GoはコアとなるSoCについて、その価格からミドルレンジのデバイスであると推測されます。
-Daydream standaloneはSnapdragon 835ベースでハイエンドのデバイスであると推測されます。
+Oculus GoはXiaomi製で、Snapdragon 821搭載とは思えない低価格を実現してきました。
+Fixed Foveated Renderingと72HzのRefreshレート、新しい液晶によりGalaxy S7のGear VRより高性能で、S8のGear VR環境と同等もしくは一部の観点では上回る性能であると言えます。
+
+Mirage SoloはSnapdragon 835を搭載し、カタログ上は一回り上のパフォーマンスで動作します。WordSenseによるポジショントラッキングはかなり快適に動作し、システム上ある程度の歩行にはブラックアウトなどの安全上の制限がかけられているものの、上半身を大きく左右に揺らしたり、立ち上がったりしゃがんだりする動作に対しては、快適にポジショントラッキングが働きます。
 
 これらのスタンドアローン機はどのようなメリットがあるのでしょうか。
-現行機の「Galaxy S8とGear VRのセットで$749」や「Pixel 2とDaydream Viewのセットで$749」という価格帯は決して気軽に購入できるものではありません。
-「Oculus Goの$199」や「Daydream standaloneの$599」は販促目的でのVR体験キャンペーンなどに20台とか用意する際の費用や、物理的な取り回しにおいてメリットがある、という無難な期待をしておくのが妥当そうでしょうか。
-
-ただし、そもそも日本での入手性が不明なため、残念ながらどちらも「VRマニアなら持ってる」という一品で終わってしまう可能性もあります。
+現行機の「Galaxy S8とGear VRのセットで$749」や「Pixel 2とDaydream Viewのセットで$749」という価格帯は気軽に購入できるものではありません。
+「Oculus Goの$199」や「Daydream standaloneの$399」は販促目的でのVR体験キャンペーンなどに20台とか用意する際の費用や、物理的な取り回しにおいてメリットがあるため、そのあたりがハードルとなっていた層には確実に刺さると思われます。
 
 //footnote[vr-ar-mr-google][VR／AR／MRは「空間的コンピューティング」の波だ　Googleが語るDaydream・Tangoの基礎【Unite】 | PANORA VR @<href>{http://panora.tokyo/27157/}]
 //footnote[daydream-standalone][Daydream standalone @<href>{https://vr.google.com/daydream/standalonevr/}]
@@ -246,11 +245,12 @@ ARKitは買収したMetaio@<fn>{apple-metaio}の技術が使われていると�
 なぜなら、歴史的にiOSは「既存のサービスのクローンを作りやすくする機能、あるいはクローンそのもの」をぶつけてくることが多いのですが、ARKitについてはそうではありません。
 前述の写真を"盛る"ための機能としてiPhone XのTrueDepthカメラシステムによる3Dウ○コがやってきた話とは違うのです。
 
-そんなARKitですが、世間におおいに担ぎ上げられたため、Googleは大慌てでTangoをARCoreにピボットすることになってしまいました。
-そのARCoreはARKitとほぼ同等で、水平面しか検出できず、Depthもとれず、Area Learningによる外界検出結果の保存・読み出しには対応していません。
+そんなARKitですが、世間におおいに担ぎ上げられたせいなのか、Googleは大慌てでTangoをARCoreに方針転換することになってしまいました。
+そのARCoreはARKitとほぼ同等で、Depthもとれず、Area Learningによる外界検出結果の保存・読み出しには対応していません。
 Tangoと比較して、機能としてはかなりの劣化版です。
 
-本質的なARはGoogleマップですでに日常使われています。「カメラ映像にCGを重畳する」の延長線上としてみんなが期待する電脳メガネやオーグマーは、HoloLensがその入り口に立ったところで、もう少し将来の話です。今のARブームは波がすぎると、現状のニッチであっても市場ができたVRのようには定着しないと思っています。
+本質的なARはGoogleマップですでに日常使われています。
+「カメラ映像にCGを重畳する」の延長線上としてみんなが期待する電脳メガネやオーグマーは、HoloLensがその入り口に立ったところで、もう少し将来の話です。今のARブームは波がすぎると、現状のニッチであっても市場ができたVRのようには定着しないと思っています。
 
 そんなARKitとARCoreですが、VRの世界から眺めて「モバイルにポジショントラッキング技術が来た」と考えると、次の一手が楽しみになります。
 Windows MRやOculusのSanta Cruzのように複数のカメラでもなければ、TangoやiPhone XのようにDepthカメラを持つわけではない、ハードウェアがよりシンプルで難易度の高いVisual SLAMにAppleとGoogleというモバイルの二大巨頭がパワーをつぎ込んでくれるわけです。

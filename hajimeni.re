@@ -13,9 +13,13 @@
  * Daydream Viewを買わずになんとかDaydreamを試す方法が知りたい
  * VRやAndroidやUnityやプログラミングについてちょっとは知っていて、Daydreamアプリを開発してみたい
 
+== Mirage Solo対応について（2018.05）
+
+Daydream StandaloneであるMirage Soloが発売となりましたので、それにあわせて一部のコンテンツを修正し、Mirage Soloの章を追記しております。セットアップは開発者向けオプションなど一部2017.10当時の記載が残っておりますが、適時読み替えて確認願います。
+
 == 賞味期限とリポジトリ公開について
 
-なお、本書は記載内容の賞味期限が切れてしまうことへのアップデート対応、あまり紙メディアが向いていない環境等のバージョンアップに追従するため、初版以降のPDFと関連ファイル一式を全て以下のリポジトリで公開予定です。
+なお、本書は記載内容の賞味期限が切れてしまうことへのアップデート対応、あまり紙メディアが向いていない環境等のバージョンアップに追従するため、初版以降のPDFと関連ファイル一式を全て以下のリポジトリで公開しております。
 あらかじめご了承ください。
 
  * @<href>{https://github.com/youten/howto-create-vr-contents2}
@@ -32,4 +36,3 @@
 //footnote[cs-reporters-yuno][©Gugenka® from CS-REPORTERS.INC/YUNO @<href>{https://gugenka.jp/original/yuno-3d.php}]
 //footnote[cc-by-4][@<href>{https://creativecommons.org/licenses/by/4.0/legalcode.ja}]
 //footnote[apache-license-v2][@<href>{http://www.apache.org/licenses/LICENSE-2.0}]
-
