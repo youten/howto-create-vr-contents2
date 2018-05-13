@@ -131,7 +131,29 @@ adb経由の静止画・動画キャプチャですが、コマンドが少々�
  * Twitter：@<code>{adb shell am start -n com.twitter.android/.StartActivity}
  * Google Photo（プリイン）：@<code>{adb shell am start -n com.google.android.apps.photos/.home.HomeActivity}
 
+また、手順がとても面倒ですが、インターネットに接続されている状態であればメニュー操作でも起動することが可能です。
+Dashboardの「すべての設定」より、「アプリと通知」＞「N個のアプリをすべて表示」＞起動したいアプリを選択＞「アプリの詳細」でGoogle Playの該当ページを開く＞「開く」を選択してアプリを起動する。
+
 Daydreamに対応した非VRアプリも含めて起動するランチャーを作ってしまえば解決するかな、とも思っています。
+
+==== 直接起動するだけのDaydreamアプリを作る
+
+Intentもアプリ詳細を辿る操作も不便なので、「Daydreamのルールにのっとりホームやライブラリにアイコンが表示される」かつ「Intentで特定パッケージのアプリを起動する」アプリを作ればいいわけです。
+
+//image[twlauncher-01][TwLauncher for Daydream standalone][scale=0.6]
+
+作りました。
+
+ひとまず、Twitterを直接呼ぶアプリを試しに作ってみました。Playで公開している@<fn>{twlauncher-twitter}の他、GitHubにソースコード一式@<fn>{twlauncher-github}を置いています。
+
+ほぼコードを書いていないこのアプリがそれなりに便利だったので、既存のランチャーアプリを起動するショートカットアプリを作ればすべてが解決するのでは、と考えました。
+AtomicAdd Teamの「小型デスクトップ（ランチャー）@<fn>{tinylauncher}」というアプリが便利だという情報を見つけましたので、これ向けにパッケージ名を変更したものを用意してみたところ、よさそうです@<fn>{twlauncher-tinylauncher-branch}。
+ただし、いわゆる「ホームアプリ」を複数インストールするとややこしいことになりますのでそのあたりは知ってる人だけお試しください。
+
+//footnote[twlauncher-github][@<href>{https://github.com/youten/TwLauncher}]
+//footnote[twlauncher-twitter][TwLauncher for Daydream standalone @<href>{https://play.google.com/store/apps/details?id=tw.youten.redo.tw}]
+//footnote[tinylauncher][@<href>{https://play.google.com/store/apps/details?id=com.atomicadd.tinylauncher}]
+//footnote[twlauncher-tinylauncher-branch][@<href>{https://github.com/youten/TwLauncher/blob/28e435de7c1f483691da5f8f73e0def648343c9a/tinylauncher.apk} 使ってみた動画はこちらのツイートを参照@<href>{https://twitter.com/youten_redo/status/995362623381159936}]
 
 ==== Bluetoothヘッドホンなどを使う
 
@@ -150,6 +172,8 @@ Bluetooth設定が塞がれていますが、 Bluetooth設定をIntent（@<code>
  ** 正直びっくりしました。どうもMirage Solo内で一般ユーザがスクリーンショットなどを扱うことを考慮していないようです。 前述したコントローラによるスクリーンショットを有効にした上で、@<code>{adb pull}または「2D ViewのGoogle Photoアプリを起動して自動バックアップフォルダを指定」することにより、インターネット経由で取得することができます。
  * VR対応Chromeがない
  ** Chrome VR（WebVRとVRモード正式対応のバージョン68と思われます）で正式対応予定とのことです。
+ ** Chrome Dev@<fn>{chrome-dev}という開発版のAndroid向けChromeがバージョン68に追いついていますので、これをinstallして、@<code>{chrome://flags}というURL入力から開く設定画面で、WebVRを有効にするとそれなりに動作します。「それなり」というのは、正式版ではないChromeではもともと機能が制限されていることと、マイク入力からの音声検索やタブ表示・切り替えなどが現状、正常に動作しません。
  ** 2D ViewのChromeは動作します。Chrome betaやfirefoxなどの別ブラウザアプリを入れることもできます。
- ** WebViewやChrome Custom Tabsは動作しましたが、筆者の確認手順ではカスタムURL schemeによるActivityフックが動かない（OAuth認証シーケンスが非一体型のDaydreamと同じ実装では動作しません！）のを確認しています。
- ** Intentによるアプリ連携・分業がAndroidの最高のメリットなため、このあたりは早急に修正されてほしいなと思っています。
+ ** WebViewやChrome Custom Tabsは動作しましたが、筆者の確認手順ではカスタムURL schemeによるActivityフックが動かない（OAuth認証シーケンスが非一体型のDaydreamと同じ実装では動作しません！）のを確認しています。Intentによるアプリ連携・分業がAndroidの最高のメリットなため、このあたりは早急に修正されてほしいなと思っています。
+
+//footnote[chrome-dev][@<href>{https://play.google.com/store/apps/details?id=com.chrome.dev}]
