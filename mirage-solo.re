@@ -131,7 +131,7 @@ adb経由の静止画・動画キャプチャですが、コマンドが少々�
  * Twitter：@<code>{adb shell am start -n com.twitter.android/.StartActivity}
  * Google Photo（プリイン）：@<code>{adb shell am start -n com.google.android.apps.photos/.home.HomeActivity}
 
-また、手順がとても面倒ですが、インターネットに接続されている状態であればメニュー操作でも起動することが可能です。
+また、手順が複雑ですが、インターネットに接続されている状態であればメニュー操作でも起動することが可能です。
 Dashboardの「すべての設定」より、「アプリと通知」＞「N個のアプリをすべて表示」＞起動したいアプリを選択＞「アプリの詳細」でGoogle Playの該当ページを開く＞「開く」を選択してアプリを起動する。
 
 Daydreamに対応した非VRアプリも含めて起動するランチャーを作ってしまえば解決するかな、とも思っています。
@@ -172,8 +172,9 @@ Bluetooth設定が塞がれていますが、 Bluetooth設定をIntent（@<code>
  ** 正直びっくりしました。どうもMirage Solo内で一般ユーザがスクリーンショットなどを扱うことを考慮していないようです。 前述したコントローラによるスクリーンショットを有効にした上で、@<code>{adb pull}または「2D ViewのGoogle Photoアプリを起動して自動バックアップフォルダを指定」することにより、インターネット経由で取得することができます。
  * VR対応Chromeがない
  ** Chrome VR（WebVRとVRモード正式対応のバージョン68と思われます）で正式対応予定とのことです。
- ** Chrome Dev@<fn>{chrome-dev}という開発版のAndroid向けChromeがバージョン68に追いついていますので、これをinstallして、@<code>{chrome://flags}というURL入力から開く設定画面で、WebVRを有効にするとそれなりに動作します。「それなり」というのは、正式版ではないChromeではもともと機能が制限されていることと、マイク入力からの音声検索やタブ表示・切り替えなどが現状、正常に動作しません。
+ ** Chrome Dev@<fn>{chrome-dev}やChrome Canary@<fn>{chrome-canary}という開発版のAndroid向けChromeなどがVR向けモードを試験的に導入しています。これをinstallして、@<code>{chrome://flags}というURL入力から開く設定画面で、WebVRを有効にするとそれなりに動作します。「それなり」というのは、正式版ではないChromeではもともと機能が制限されていることと、マイク入力からの音声検索やタブ表示・切り替えなどが現状、正常に動作しません。
  ** 2D ViewのChromeは動作します。Chrome betaやfirefoxなどの別ブラウザアプリを入れることもできます。
  ** WebViewやChrome Custom Tabsは動作しましたが、筆者の確認手順ではカスタムURL schemeによるActivityフックが動かない（OAuth認証シーケンスが非一体型のDaydreamと同じ実装では動作しません！）のを確認しています。Intentによるアプリ連携・分業がAndroidの最高のメリットなため、このあたりは早急に修正されてほしいなと思っています。
 
-//footnote[chrome-dev][@<href>{https://play.google.com/store/apps/details?id=com.chrome.dev}]
+//footnote[chrome-dev][@<href>{https://play.google.com/store/apps/details?id=com.chrome.dev} ]
+//footnote[chrome-canary][@<href>{https://play.google.com/store/apps/details?id=com.chrome.canary}]
