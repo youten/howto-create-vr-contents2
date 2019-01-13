@@ -179,7 +179,7 @@ Resonance Audio SDKの守備範囲については公式サイト（@<img>{gvr-re
 //image[gvr-audio-factory-01][Audio Factoryアプリ][scale=0.75]
 
 この、Resonance Audio SDKを利用したサンプルとして、Audio Factoryアプリ@<fn>{audio-factory-app}というデモアプリが公開されています。
-Spacial Audioを効果的に組み込んだ@<kw>{モバイルVRでもここまではやれる}ということを示す最高のデモになっていますので、ぜひヘッドホンを用意して体験してください。
+Spatial Audioを効果的に組み込んだ@<kw>{モバイルVRでもここまではやれる}ということを示す最高のデモになっていますので、ぜひヘッドホンを用意して体験してください。
 
 また、Audio FactoryアプリはGitHubでリポジトリ一式が公開されています@<fn>{audio-factory-app-github}。
 
