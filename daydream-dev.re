@@ -26,7 +26,7 @@ Unityのバージョンは推奨されている「Unity2017.4系のLTS Release�
  1. 新規3Dプロジェクトを作成し、「GoogleVRForUnity_*.unitypackage」をダウンロードしてインポート
  2. APIの自動アップグレード確認ダイアログが出る際には、了承して実行
  3. 「GoogleVR＞Demos＞Scenes」配下の「HelloVR」シーンを開く
- 4. 「Build Settings」を開いて、「HelloVR」シーンをビルド対象に追加、Platformを「Andorid」に「Switch Platform」を実行
+ 4. 「Build Settings」を開いて、「HelloVR」シーンをビルド対象に追加、Platformを「Android」に「Switch Platform」を実行
  5. 「Player Settings」を開いて、以下の設定を変更
  6. 「Other Settings」より「Package Name」を適当な文字列に変更
  7. 同じく「Other Settings」より「Minimum API Level」を「Android 7.0 'Nougat' (API level 24)」に変更
@@ -56,7 +56,7 @@ HelloVRのプレビュー再生中に、以下の操作を試して見てくだ�
  * Shift + マウス移動：Daydreamコントローラの傾きを操作
  * Shift + マウス左クリック：Daydreamコントローラのタッチパッドのクリック
  * Shift + マウス中央クリック：DaydreamコントローラのHomeボタンのクリック（recenter扱い）
- * Shift + マウス右クリック：DayrdreamコントローラのAppボタンのクリック
+ * Shift + マウス右クリック：DaydreamコントローラのAppボタンのクリック
  * Shift + Ctrl + マウス移動：Daydreamコントローラのタッチパッド上でのスワイプ操作
 
 //image[gvr-sdk-editor-simulation][Unityエディタ上でのDaydreamコントローラのタッチパッドシミュレーションの様子][scale=0.75]
@@ -74,7 +74,7 @@ Unityエディタ上では平面でしかありませんので、ヘッドセッ
 
 //image[gvr-sdk-instant-preview][Instant PreviewとController Emulatorセットでの動作の様子][scale=0.90]
 
-Instant Previewは、専用のアプリをAndoridデバイス上で動作させ、Unityエディタと通信させてこれを実現するものです。
+Instant Previewは、専用のアプリをAndroidデバイス上で動作させ、Unityエディタと通信させてこれを実現するものです。
 画像はUnityエディタからInstant Previewアプリへの映像ストリーミングで実現します。
 また、逆方向でDaydreamコントローラの操作による入力も可能です。
 コントローラの操作については前章で紹介したController EmulatorアプリによるDaydreamコントローラのエミュレートにも対応しています（@<img>{gvr-sdk-instant-preview}）。

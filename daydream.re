@@ -42,7 +42,7 @@ Lenovo社の一体型Daydream機であるMirage SoloはLCDを搭載していま�
 //footnote[jdi-lcd-for-vr][ニュース＆イベント : ニュースリリース | 株式会社ジャパンディスプレイ @<href>{http://www.j-display.com/news/2016/20161121.html}]
 //footnote[mirage-solo-spec][Lenovo Mirage Solo with Daydream | スタンドアロン型VRヘッドセット | レノボジャパン @<href>{https://www3.lenovo.com/jp/ja/vr-smartdevices/augmented-reality/lenovo-mirage-solo/Mirage-Solo/p/ZZIRZRHVR01}]
 
-=== Daydaream Viewとコントローラ
+=== Daydream Viewとコントローラ
 
 //image[daydream-view-controller][Daydream View（旧型）本体と専用コントローラ][scale=0.75]
 
@@ -106,7 +106,7 @@ Daydreamアプリのホーム画面から「キャスト」を選択すると常
 
 Android 7.0 NougatでDaydreamのために特別な対応が入り、AndroidプラットフォームとしてはVRモードというものが定義されました。
 Androidでは、デバイスの互換性について定義したCDD@<fn>{android-cdd}というドキュメントがあり、その中にVirutal Realityという項目があります。
-CDDはAndroidデバイスそのものをつくる仕事でもしていなければあまり縁がないドキュメントなのですが、VRモードの定義の他、「DadyreamというVirtual Reality要件に対応したAndroidデバイスはどんな条件を満たさないといけないのか」という話はアプリ開発側の観点でも面白い情報が詰まっています。詳細を少しみていきましょう。
+CDDはAndroidデバイスそのものをつくる仕事でもしていなければあまり縁がないドキュメントなのですが、VRモードの定義の他、「DaydreamというVirtual Reality要件に対応したAndroidデバイスはどんな条件を満たさないといけないのか」という話はアプリ開発側の観点でも面白い情報が詰まっています。詳細を少しみていきましょう。
 
 CDDの「7.9. Virtual Reality」の項目@<fn>{android-cdd-vr}に「7.9.1. Virtual Reality Mode」という記載があり、そこでは「VRモードをサポートすること。そのモードでは、通知などを双眼のHMDのためにステレオでレンダリングし、VRアプリケーションが動作している間はモノラル（単眼）のシステムUIを無効化すること。」とあります。
 ディスプレイの黒挿入モードやフレームバッファへのダイレクトレンダリング、センサ情報の低遅延伝達あたりはこの「VRモード」と直接は関係ない模様です。
