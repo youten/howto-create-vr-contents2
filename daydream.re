@@ -29,7 +29,7 @@ SoC、センサ、ディスプレイの3つの要件があります。
  * 姿勢予測のための高い分解能と低遅延のセンサ
  * 高い応答速度、低遅延のディスプレイ
 
-SoCについては、現状Daydream-ready phonesに認定されているAndroidデバイスから判断するとSnapdrago 820以上であれば満たすと考えられます。
+SoCについては、現状Daydream-ready phonesに認定されているAndroidデバイスから判断するとSnapdragon 820以上であれば満たすと考えられます。
 ただし、「MediaTekがDaydreamのためのSoCを開発する」というニュース@<fn>{daydream-ready-soc-mediatek}も発表されており、Snapdragonに限定はされていない模様です。
 
 ディスプレイについては、応答性能の観点で有機ELが主流ですが、応答性能の高い液晶も追って開発されました。
