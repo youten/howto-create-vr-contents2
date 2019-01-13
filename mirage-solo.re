@@ -113,7 +113,7 @@ adb経由の静止画・動画キャプチャですが、コマンドが少々�
 他のAndroidデバイスと同様、fastbootメニューからのfactory resetが可能です。
 操作不能に陥った際には実施しましょう。
 
- * 電源OFFの状態で、音量（-）ボタンを押したまま、電源ボタンを2秒ほど押して話すと、fastbootモードで起動します（@<img>{fastboot-recovery}-左）。
+ * 電源OFFの状態で、音量（-）ボタンを押したまま、電源ボタンを2秒ほど押して離すと、fastbootモードで起動します（@<img>{fastboot-recovery}-左）。
  * fastbootモードにて、音量ボタンにて「RECOVERY MODE」を選択し、電源ボタンで決定操作をします。
  * ドロイド君に赤い警告マークが出て「No Command」と表示された画面で、電源ボタンを押しながら、音量（+）ボタンを押すと、RECOVERY MODEのメニューが表示されます（@<img>{fastboot-recovery}-右）。
  * 同じく音量ボタンと電源ボタンにて、「Wipe data/factory reset」を選択すると、factory resetが実施されます。「Wipe data」の通り、全てのデータは初期化されます。
@@ -144,7 +144,7 @@ Intentもアプリ詳細を辿る操作も不便なので、「Daydreamのルー
 
 作りました。
 
-ひとまず、Twitterを直接呼ぶアプリを試しに作ってみました。Playで公開している@<fn>{twlauncher-twitter}の他、GitHubにソースコード一式@<fn>{twlauncher-github}を置いています。
+ひとまず、Twitterを直接呼ぶアプリを試しに作ってみました。Playで公開している@<fn>{twlauncher-twitter}他、GitHubにソースコード一式@<fn>{twlauncher-github}を置いています。
 
 ほぼコードを書いていないこのアプリがそれなりに便利だったので、既存のランチャーアプリを起動するショートカットアプリを作ればすべてが解決するのでは、と考えました。
 AtomicAdd Teamの「小型デスクトップ（ランチャー）@<fn>{tinylauncher}」というアプリが便利だという情報を見つけましたので、これ向けにパッケージ名を変更したものを用意してみたところ、よさそうです@<fn>{twlauncher-tinylauncher-branch}。

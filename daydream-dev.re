@@ -263,7 +263,7 @@ NoloVR_SDK_1.1.7_20171017.unitypackageをダウンロードしてインポート
 
 //image[nolo-unity-01][SDK内Exampleフォルダ配下のTestサンプルシーンを選択][scale=0.6]
 
-SDK内、Exapmpleフォルダ配下にはいくつかのサンプルシーンが含まれています。
+SDK内、Exampleフォルダ配下にはいくつかのサンプルシーンが含まれています。
 ひとまずSDKとしてコントローラやヘッドセットマーカーの空間上の座標や向き、ボタンの状態などの情報が表示される、「NoloVR＞Example＞General＞Test」シーン（@<img>{nolo-unity-01}）を試してみます。
 
 //image[nolo-unity-03][Testシーンの動作画面][scale=1.00]
